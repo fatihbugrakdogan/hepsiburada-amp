@@ -14,20 +14,13 @@ app.add_middleware(
 )
 
 @app.get("/get-amp")
-async def root(request: Request):
-    # Get the AMP source origin from the request headers
-    amp_source_origin = request.headers.get("AMP-Same-Origin", None)
-    
-    # Validate the AMP source origin
-    sleep(5)
-    if not amp_source_origin:
-        return JSONResponse(status_code=400, content={"error": "AMP-Same-Origin header missing"})
-    
+async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
     # Set the amp-access-control-allow-source-origin header to match the AMP source origin
+    sleep(4)
     headers = {
-        "amp-access-control-allow-source-origin": amp_source_origin,
+        "amp-access-control-allow-source-origin": __amp_source_origin,
         "Content-Type": "application/json"  # Set the appropriate content type for your response
     }
     
     # Return a response with the headers set
-    return JSONResponse(status_code=200, content={"message": "Form submitted successfully"}, headers=headers)
+    return JSONResponse(status_code=200, content={"message": "Request processed successfully"}, headers=headers)
