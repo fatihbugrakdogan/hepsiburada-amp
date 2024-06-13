@@ -6,4 +6,4 @@ app = FastAPI()
 @app.get("/get-amp")
 async def root():
     sleep(10)
-    return {"greeting": "Hello, World!", "message": "Welcome to FastAPI!"}
+    return {"openModal": True}
