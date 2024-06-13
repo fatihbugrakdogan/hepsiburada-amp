@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from time import sleep
 from fastapi.middleware.cors import CORSMiddleware
 
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +19,7 @@ async def root(request: Request):
     amp_source_origin = request.headers.get("AMP-Same-Origin", None)
     
     # Validate the AMP source origin
+    sleep(5)
     if not amp_source_origin:
         return JSONResponse(status_code=400, content={"error": "AMP-Same-Origin header missing"})
     
