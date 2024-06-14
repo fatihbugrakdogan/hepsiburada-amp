@@ -18,7 +18,7 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
     # Set the amp-access-control-allow-source-origin header to match the AMP source origin
     sleep(4)
     headers = {
-        "AMP-Email-Allow-Sender": __amp_source_origin,
+        "AMP-Email-Allow-Sender": "*",
         "Content-Type": "application/json"  # Set the appropriate content type for your response
     }
     
