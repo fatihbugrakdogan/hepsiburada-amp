@@ -12,40 +12,34 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-trusted_emails = ["trusted@example.com"]  # Güvendiğiniz e-posta adreslerini burada tanımlayın
 
 @app.get("/get-amp")
 async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
-    # HTTP isteklerini kontrol edin
+    # Check HTTP requests
     origin = request.headers.get("Origin")
     amp_email_sender = request.headers.get("AMP-Email-Sender")
     
     if amp_email_sender:
         sender_email = amp_email_sender
-        if sender_email not in trusted_emails:
-            raise HTTPException(status_code=403, detail="Untrusted email sender")
         headers = {
             "AMP-Email-Allow-Sender": sender_email,
             "Content-Type": "application/json"
         }
     elif origin:
-        request_origin = origin
         if not __amp_source_origin:
             raise HTTPException(status_code=400, detail="Missing __amp_source_origin query parameter")
         
-        sender_email = __amp_source_origin
-        
         headers = {
             "Access-Control-Allow-Origin": "*",
-            "AMP-Access-Control-Allow-Source-Origin": "*",
-            "Access-Control-Expose-Headers": "*",
+            "AMP-Access-Control-Allow-Source-Origin": __amp_source_origin,
+            "Access-Control-Expose-Headers": "AMP-Access-Control-Allow-Source-Origin",
             "Content-Type": "application/json"
         }
     else:
         raise HTTPException(status_code=400, detail="Missing Origin or AMP-Email-Sender headers")
     
-    # İsteği bekletin
-    sleep(7)
+    # Simulate request processing delay
+    sleep(5)
     
-    # Yanıtı başlıklarla birlikte döndürün
+    # Return response with headers
     return JSONResponse(status_code=200, content={"message": "Request processed successfully"}, headers=headers)
