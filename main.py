@@ -38,7 +38,7 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
         headers = {
             "Access-Control-Allow-Origin": request_origin,
             "AMP-Access-Control-Allow-Source-Origin": sender_email,
-            "Access-Control-Expose-Headers": "AMP-Access-Control-Allow-Source-Origin",
+            "Access-Control-Expose-Headers": sender_email,
             "Content-Type": "application/json"
         }
     else:
