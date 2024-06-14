@@ -45,7 +45,7 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
         raise HTTPException(status_code=400, detail="Missing Origin or AMP-Email-Sender headers")
     
     # İsteği bekletin
-    sleep(4)
+    sleep(7)
     
     # Yanıtı başlıklarla birlikte döndürün
     return JSONResponse(status_code=200, content={"message": "Request processed successfully"}, headers=headers)
