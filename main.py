@@ -21,6 +21,7 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
     current_date = datetime.now()
 
     if not (start_date <= current_date <= end_date):
+        sleep(5)
         raise HTTPException(status_code=400, detail="Kampanya 1-7 Haziran 2024 arasında geçerlidir.")
     
     # Check HTTP requests
