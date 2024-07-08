@@ -31,7 +31,7 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
         }
     elif origin:
         if not __amp_source_origin:
-            raise HTTPException(status_code=400, detail={"message":"Çark çevilirken bir hata oluştu. Lütfen tekrar deneyin."},headers=headers)
+            raise JSONResponse(status_code=400, detail={"message":"Çark çevilirken bir hata oluştu. Lütfen tekrar deneyin."},headers=headers)
         
         headers = {
             "Access-Control-Allow-Origin": "*",
@@ -40,11 +40,11 @@ async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
             "Content-Type": "application/json"
         }
     else:
-        raise HTTPException(status_code=400, detail={"message":"Çark çevilirken bir hata oluştu. Lütfen tekrar deneyin."},headers=headers)
+        raise JSONResponse(status_code=400, detail={"message":"Çark çevilirken bir hata oluştu. Lütfen tekrar deneyin."},headers=headers)
 
     if not (start_date <= current_date <= end_date):
         sleep(5)
-        raise HTTPException(status_code=400, detail={"message":"Kampanya 1-7 Haziran 2024 arasında geçerlidir."},headers=headers)
+        raise JSONResponse(status_code=400, detail={"message":"Kampanya 1-7 Haziran 2024 arasında geçerlidir."},headers=headers)
     
     
     
