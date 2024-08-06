@@ -16,8 +16,8 @@ app.add_middleware(
 @app.get("/get-amp")
 async def get_amp(request: Request, rotated: bool, __amp_source_origin: str):
     # Check campaign date
-    start_date = datetime(2024, 6, 1)
-    end_date = datetime(2024, 6, 7)
+    start_date = datetime(2024, 8, 1)
+    end_date = datetime(2024, 8, 30)
     current_date = datetime.now()
         # Check HTTP requests
     origin = request.headers.get("Origin")
